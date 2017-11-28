@@ -9,8 +9,6 @@ class Distro
     protected:
         string name, type, pkgmgr, ver;
 
-        static int count;
-
     public:
 
         // constructors
@@ -31,6 +29,8 @@ class Distro
         string getVer () const;
         
         int getCount() const;
+
+        static int count;
 
         // operator overloads
     

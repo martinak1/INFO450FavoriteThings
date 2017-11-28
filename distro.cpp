@@ -11,7 +11,7 @@ Distro::Distro()
     pkgmgr  = "";
     ver     = "";
 
-    count++;
+    ++count;
 }
 
 // overloaded constructor
@@ -22,7 +22,7 @@ Distro::Distro( string nm, string typ, string mgr, string vr )
     pkgmgr  = mgr;
     ver     = vr;
 
-    count++;
+    ++count;
 }
 
 // setter for name
@@ -83,10 +83,10 @@ int Distro::getCount() const
 
 ostream &operator<<( ostream &stream, Distro dist)
 {
-    stream  << "Name:\t" << dist.name 
-            << "\nType:\t" << dist.type 
+    stream  << "Name:\t\t\t" << dist.name 
+            << "\nType:\t\t\t" << dist.type 
             << "\nPackage Manager:\t" << dist.pkgmgr
-            << "\nVersion:\t" << dist.ver << "\n"
+            << "\nVersion:\t\t" << dist.ver << "\n"
             << endl;
 }
 

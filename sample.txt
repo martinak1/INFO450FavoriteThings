@@ -1,0 +1,5 @@
+Arch|Binary and Compiling|yaourt|Rolling
+Debian|Binary|apt-get|9
+Fedora|Binary|dnf|27
+CentOs|Binary|yum|7
+Gentoo|Compiling|portage|Rolling
