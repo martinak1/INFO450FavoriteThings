@@ -19,64 +19,109 @@ int main()
 
     while( true )
     {
-        cout << "Enter the path to the file: ";
+        cout << "\nEnter the path to the file: ";
         getline( cin, path );
 
         distFile.open( path );
 
         if( !distFile )
         {
-            cout << "You either entered the incorrect path, the file does not"
+            cout << "\nYou either entered the incorrect path, the file does not"
                  << "exist, or your do not have read/write permissions on the file"
                  << " or the directory " << endl;
-
-         }
-        else break;
+        }
+        else 
+        {
+            buildList( list, distFile );
+            distFile.close();
+            break;
+        }
     }
 
-    buildList( list, distFile );
+    int input;
 
-    displayList( list );
+    while( true )
+    {
+        cout << "\n1.\tDisplay list \n2.\tAdd Entry \n3.\tQuit"
+             << "\nWhat do you want to do?: " << endl;
+        cin >> input;
 
-    // cleanup
+        switch( input )
+        {
+           case 1:
+                displayList( list );
+                break;
 
-    distFile.close();
+            case 2:
+                distFile.open( path, ios::app );
 
-    for( int i = 0; i < Distro::count; i++ )
-        delete list[i];
+                if( !distFile  )
+                    cout << "There was an error, opening the file.";
+                else
+                    append( list, distFile );
 
-    delete list;
+                distFile.close();
+                break;
 
-    return 0;
+            case 3:
+                // cleanup
+                for( int i = 0; i < Distro::count; i++ )
+                    delete list[i];
 
+                delete list;
+
+                cout << "Exiting!" << endl;
+
+                return 0;
+
+            default:
+                cout << "Not a valid response!" << endl;
+        }
+    }
+    
+   
 }
 
 
 void append( Distro **list, fstream &distFile )
 {
-    // TODO build in bounds checking
-    string name, type, pkgmgr, ver;
+    int exit;
 
-    cout << "What is the name of the distribution?: " << endl;
-    getline( cin, name );
+    string line, name, type, pkgmgr, ver;
 
-    cout << "What type of distribution is it [ Binary || Compiling ]: " << endl;
-    getline( cin, type );
 
-    cout << "What is the name of the package manager?: " << endl;
-    getline( cin, pkgmgr ); 
+    while( true ) 
+    {
 
-    cout << "What is the current release version?: " << endl;
-    getline( cin, ver );
+        // TODO build in bounds checking
 
-    // TODO build in test to make sure there are no duplicates
-    list[ Distro::count ] = new Distro( name, type, pkgmgr, ver );
+        cin.ignore();
 
-    //distFile << name + "|" + type "|" + pkgmgr << "|" + ver + "\n";
+        cout << "What is the name of the distribution?: ";
+        getline( cin, name );
 
-    
+        cout << "What type of distribution is it [ Binary || Compiling ]: ";
+        getline( cin, type );
 
+        cout << "What is the name of the package manager?: ";
+        getline( cin, pkgmgr ); 
+
+        cout << "What is the current release version?: ";
+        getline( cin, ver );
+
+        // TODO build in test to make sure there are no duplicates
+        list[ Distro::count -1 ] = new Distro( name, type, pkgmgr, ver );
+
+        //line = name + "|" + type "|" + pkgmgr + "|" + ver + "\n";
+        distFile << line;
+
+        cout << "Press 1 to quit or other to enter another : ";
+        cin >> exit;
+
+        if( exit == 1 ) break;
+    }    
 }
+
 
 void buildList( Distro **list, fstream &distFile )
 {
