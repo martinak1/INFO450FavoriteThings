@@ -98,7 +98,6 @@ void append( Distro **list, fstream &distFile )
     while( true ) 
     {
 
-        // TODO build in bounds checking
 
         cin.ignore();
 
@@ -117,6 +116,7 @@ void append( Distro **list, fstream &distFile )
         // TODO build in test to make sure there are no duplicates
         list[ Distro::count -1 ] = new Distro( name, type, pkgmgr, ver );
 
+        /*
         if( duplicate( list, *list[ Distro::count -1 ] ))
         {
             cout << "\nERROR: Duplicate entry, skiping." << endl;
@@ -125,9 +125,10 @@ void append( Distro **list, fstream &distFile )
         }
         else
         {
+        */
             line = name + "|" + type + "|" + pkgmgr + "|" + ver + "\n";
             distFile << line;
-        }
+        //}
 
         cout << "\nEntries: " << Distro::count << " out of 50" << endl;
         cout << "Press 1 to quit or other to enter another : ";
@@ -183,11 +184,13 @@ void displayList( Distro **list )
 }
 
 
+//broken
 bool duplicate( Distro **list, Distro dist )
 {
-    for( int i = 0; i < Distro::count; i++ )
+    for( int i = 0; i < Distro::count -1; i++ )
     {
-        if( *list[i] == dist )
+        if( !(*list[i] == dist) )
+            cout << "\nDEBUG MATCH == TRUE" << endl;
             return true;
     }
 
