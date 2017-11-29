@@ -8,6 +8,8 @@ class Distro
 {
     protected:
         string name, type, pkgmgr, ver;
+    
+        friend ostream &operator<<( ostream &stream, Distro dist );
 
     public:
 
@@ -33,8 +35,6 @@ class Distro
         static int count;
 
         // operator overloads
-    
-        friend ostream &operator<<( ostream &stream, Distro dist );
 
         friend bool operator==( Distro dist1, Distro dist2 );
 };

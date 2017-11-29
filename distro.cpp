@@ -90,8 +90,9 @@ ostream &operator<<( ostream &stream, Distro dist)
             << endl;
 }
 
-bool operator==( Distro &dist1, Distro &dist2 ) 
+bool operator==( Distro dist1, Distro dist2 ) 
 {
+    /*
     if( dist1.getName() == dist2.getName())
     {
         if( dist1.getVer() == dist2.getVer())
@@ -99,15 +100,18 @@ bool operator==( Distro &dist1, Distro &dist2 )
         else 
             return false;
     }
-    /*
+    
     if( name == dist.name )
     {
         if( ver == dist.ver )
             return true;
         else return false;
     }
-    */
+    
     else 
         return false;
+    */
+
+    return ( dist1.getName() == dist2.getName() ) || ( dist1.getVer() == dist2.getVer() ); 
 }
 
