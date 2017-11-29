@@ -3,5 +3,3 @@ Debian|Binary|apt-get|9
 Fedora|Binary|dnf|27
 CentOs|Binary|yum|7
 Gentoo|Compiling|portage|Rolling
-Ubuntu|Binary|apt-get|17.10
-Red Hat|Binary|yum|7

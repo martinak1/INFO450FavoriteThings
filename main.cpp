@@ -9,6 +9,9 @@ void append     ( Distro **list, fstream &distFile );
 void buildList  ( Distro **list, fstream &distFile );
 void displayList( Distro **list );
 
+//Broken
+//bool duplicate  ( Distro **list, Distro dist );
+
 int main()
 {
     string  path;
@@ -112,9 +115,20 @@ void append( Distro **list, fstream &distFile )
         // TODO build in test to make sure there are no duplicates
         list[ Distro::count -1 ] = new Distro( name, type, pkgmgr, ver );
 
-        //line = name + "|" + type "|" + pkgmgr + "|" + ver + "\n";
-        distFile << line;
+        /*
+        if( duplicate( list, *list[ Distro::count -1 ] ))
+        {
+            cout << "\nERROR: Duplicate entry, skiping." << endl;
+            delete list[ Distro::count -1 ]; 
+        }
+        else
+        {
+        */
+            line = name + "|" + type + "|" + pkgmgr + "|" + ver + "\n";
+            distFile << line;
+        //}
 
+        cout << "\nEntries: " << Distro::count << " our of 50" << endl;
         cout << "Press 1 to quit or other to enter another : ";
         cin >> exit;
 
@@ -166,3 +180,17 @@ void displayList( Distro **list )
     for( int i = 0; i < Distro::count; i++ )
         cout << *list[ i ] << endl;
 }
+
+
+/*
+bool duplicate( Distro **list, Distro dist )
+{
+    for( int i = 0; i < Distro::count; i++ )
+    {
+        if( *list[i] == dist )
+            return true;
+    }
+
+    return false;
+}
+*/
